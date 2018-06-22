@@ -1,6 +1,6 @@
 # Dockerfile for building an Ansible control node for Network Automation
-# Ubuntu 16.04 base image
-# v1.0
+# Alpine 3.7 base image
+# v2.0
 #
 
 # Base image
