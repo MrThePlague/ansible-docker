@@ -4,22 +4,25 @@
 #
 
 # Base image
-FROM ubuntu:16.04
+FROM alpine:3.7
 
 LABEL maintainer="mrtheplague"
 
 ADD . /tmp
 WORKDIR /tmp
 
-RUN DEBIAN_FRONTEND=noninteractive  apt-get update
-
-RUN echo "** Installing Python-Pip **"
-RUN apt-get install -y python-pip
+RUN echo "** Installing Dependencies **"
+RUN apk add --update gcc \
+    musl-dev \
+    libffi-dev \
+    python \
+    python-dev \
+    py-pip \
+    make \
+    openssl-dev \
+    py-lxml
 
 RUN echo "** Installing Ansible, Napalm, and Napalm-Ansible **"
 RUN pip install -r requirements.txt
 
 WORKDIR /
-
-# default command: display Ansible version
-CMD [ "ansible-playbook", "--version" ]
